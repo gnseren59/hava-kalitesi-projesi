@@ -1,19 +1,3 @@
-import os
-import time
-import urllib.request
-
-# 1. ADIM: TEMİZLİK VE KÜTÜPHANE KURULUMU
-print("🧹 Sistem Eren için optimize ediliyor...")
-if os.path.exists('app.py'):
-    os.remove('app.py')
-
-os.system('pip install -q streamlit pandas requests plotly')
-os.system('npm install -q -g localtunnel')
-
-# 2. ADIM: EREN'İN INTERAKTİF VE GRAFİKLİ PROJESİNİ OLUŞTUR
-print("✍️ Mühendislik kod dosyası yazılıyor...")
-with open('app.py', 'w', encoding='utf-8') as f:
-    f.write('''
 import streamlit as st
 import pandas as pd
 import requests
@@ -128,18 +112,3 @@ if run_analysis:
         st.error("Şehirler bulunamadı.")
 else:
     st.info("👈 Sol taraftaki menüden şehirleri girip 'İstatistiksel Kıyaslamayı Başlat' butonuna basın kanka.")
-''')
-
-# 3. ADIM: SİTEYİ ATEŞLE
-try:
-    endpoint_ip = urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip()
-except:
-    endpoint_ip = "Şifre alınamadı"
-
-print("\n" + "="*50)
-print(f"🔑 SİTE GİRİŞ ŞİFRENİZ (IP ADRESİ): {endpoint_ip}")
-print("="*50 + "\n")
-
-get_ipython().system_raw('streamlit run app.py &')
-time.sleep(3)
-!npx localtunnel --port 8501
