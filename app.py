@@ -3,7 +3,6 @@ import pandas as pd
 import requests
 import plotly.graph_objects as go
 
-# --- PROFESYONEL KOYU TEMA VE TASARIM ---
 st.set_page_config(page_title="Atmosferik Analiz - Eren", layout="wide")
 
 st.markdown("""
@@ -16,7 +15,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 st.title("🌍 Gelişmiş Atmosferik Veri ve Kentsel Kıyaslama Paneli")
-st.markdown("### **Hazırlayan:** Eren | *Proje Notu Hedefi: 100*")
+st.markdown("### **Hazırlayan:** Eren |")
 st.divider()
 
 API_KEY = "5507212bca7c6524245659820213b2e0"
@@ -35,7 +34,6 @@ def get_air_pollution(lat, lon):
     url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API_KEY}"
     return requests.get(url).json()['list'][0]
 
-# --- YAN MENÜ (INPUT ALANI) ---
 st.sidebar.header("📍 Şehir Seçim Alanı")
 city1 = st.sidebar.text_input("1. Şehir", "Istanbul")
 city2 = st.sidebar.text_input("2. Şehir", "Ankara")
@@ -52,13 +50,13 @@ if run_analysis:
         comp1 = d1['components']
         comp2 = d2['components']
         
-        # 1. BÖLÜM: GENEL AQI SKORLARI
+        
         st.subheader("🎯 Hava Kalitesi İndeksi (AQI) Karşılaştırması")
         col_m1, col_m2 = st.columns(2)
         col_m1.metric(label=f"🟢 {name1} Genel AQI Durumu", value=f"{d1['main']['aqi']} / 5")
         col_m2.metric(label=f"🔵 {name2} Genel AQI Durumu", value=f"{d2['main']['aqi']} / 5")
         
-        # 2. BÖLÜM: RADAR GRAFİĞİ
+        
         st.divider()
         st.subheader("📊 Gaz Dağılım Kimyası (Çok Boyutlu Radar Grafik)")
         
@@ -79,7 +77,7 @@ if run_analysis:
         )
         st.plotly_chart(fig, width='stretch')
         
-        # 3. BÖLÜM: İSTATİSTİKSEL VERİ TABLOSU
+        
         st.divider()
         st.subheader("📝 Detaylı Mikrogram Eğilim Matrisi (µg/m³)")
         
@@ -90,7 +88,7 @@ if run_analysis:
         })
         st.dataframe(df, use_container_width=True)
         
-        # 4. BÖLÜM: SAĞLIK ANALİZ MOTORU
+        
         st.divider()
         st.subheader("💡 Eren Yapay Zeka Sağlık Raporu")
         
