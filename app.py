@@ -105,7 +105,7 @@ if run_analysis:
         
         csv = df.to_csv(index=False).encode('utf-8')
         st.sidebar.download_button("📂 İstatistiksel Raporu İndir (CSV)", csv, "eren_hava_analizi.csv", "text/csv")
-        st.success("Analiz Eren tarafından başarıyla mühürlendi! Proje Notu: 100 ✅")
+        st.success("Analiz Eren tarafından başarıyla mühürlendi!✅")
     else:
         st.error("Şehirler bulunamadı.")
 else:
